@@ -7,10 +7,24 @@ const public_users = express.Router();
 
 public_users.post("/register", (req,res) => {
   //Write your code here
-  return res.status(200).json({
-    message: "Success get data",
-    data: books
-});
+  const {
+    username,
+    password
+  } = req.body
+
+  // Check if both username and password are provided
+  if (username && password) {
+    // Check if the user does not already exist
+    if (isValid(username)) {
+        // Add the new user to the users array
+        users.push({"username": username, "password": password});
+        return res.status(201).json({message: "User successfully registered. Now you can login"});
+    } else {
+        return res.status(209).json({message: "User already exists!"});
+    }
+  }
+
+  return res.status(404).json({message: "Input error. please fill all fields"});
 });
 
 // Get the book list available in the shop
