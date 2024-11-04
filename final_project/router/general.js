@@ -53,7 +53,9 @@ public_users.get('/author/:author',function (req, res) {
   const author = req.params.author
   let bookByAuthor = []
 
-  for(const book in books) {
+  for(const idx in books) {
+    let book = books[idx]
+
     if(book.author.includes(author)) {
         bookByAuthor.push(book)
     }
@@ -71,7 +73,9 @@ public_users.get('/title/:title',function (req, res) {
   const title = req.params.title
   let bookByTitle = []
 
-  for(const book in books) {
+  for(const idx in books) {
+    let book = books[idx]
+    
     if(book.title.includes(title)) {
         bookByTitle.push(book)
     }
