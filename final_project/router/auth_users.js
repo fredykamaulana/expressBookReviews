@@ -67,13 +67,17 @@ regd_users.post("/login", (req,res) => {
 regd_users.put("/auth/review/:isbn", (req, res) => {
   //Write your code here
   const isbn = req.params.isbn
-  const username = req.session.authorization[username]
+  const username = req.session.authorization.username
   let book = books[isbn]
 
   if(book) {
-    let review = book.bookReview
+    let review = { }
+
+    if(book.bookReview) {
+        review = book.bookReview
+    }
+
     review[username] = req.query.review
-    //review.username = req.query.review
 
     books[isbn].bookReview = review
 
@@ -88,7 +92,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
 regd_users.delete("/auth/review/:isbn", (req, res) => {
     //Write your code here
     const isbn = req.params.isbn
-    const username = req.session.authorization[username]
+    const username = req.session.authorization.username
     let book = books[isbn]
   
     if(book) {
